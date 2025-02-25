@@ -37,7 +37,6 @@
         "https://temu.com",
         "https://rakuten.co.jp",
         "https://kijiji.ca",
-        "https://linio.com.mx",
         "https://argos.co.uk",
         "https://fnac.com",
         "https://gmarket.co.kr",
