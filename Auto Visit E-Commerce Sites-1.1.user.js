@@ -7,6 +7,7 @@
 // @match        *://*/*
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @grant        GM_addStyle
 // ==/UserScript==
 
 (function() {
@@ -160,6 +161,7 @@
         "https://tradera.com",
         "https://ebay.vn"
     ];
+    const domainsWithoutWWW = domains.map(domain => domain.replace('www.', ''));
 
     // Get current index or start at 0
     let currentIndex = Number(GM_getValue('currentIndex', 0));
@@ -167,17 +169,17 @@
     // Remove www. for matching
     const currentUrl = window.location.href.replace('www.', '');
 
-    if(domains.some(domain => currentUrl.startsWith(domain))) {
+    if(domainsWithoutWWW.some(domain => currentUrl.startsWith(domain))) {
         // If on target site, wait 10 seconds then move to next
         setTimeout(() => {
-            currentIndex = (currentIndex + 1) % domains.length;
+            currentIndex = (currentIndex + 1) % domainsWithoutWWW.length;
             GM_setValue('currentIndex', currentIndex);
-            window.location.href = domains[currentIndex];
+            window.location.href = domainsWithoutWWW[currentIndex];
         }, 10000);
     }
     else {
         // If not on target site, go to current index immediately
-        window.location.href = domains[currentIndex];
+        window.location.href = domainsWithoutWWW[currentIndex];
     }
 
     // Add custom CSS for notifications
@@ -220,19 +222,19 @@
         }, 3000);
     }
 
-   if(domains.some(domain => currentUrl.startsWith(domain))) {
+   if(domainsWithoutWWW.some(domain => currentUrl.startsWith(domain))) {
         // Show success notification
         showSuccessMessage(window.location.href);
 
         // Wait 10 seconds then move to next
         setTimeout(() => {
-            currentIndex = (currentIndex + 1) % domains.length;
+            currentIndex = (currentIndex + 1) % domainsWithoutWWW.length;
             GM_setValue('currentIndex', currentIndex);
-            window.location.href = domains[currentIndex];
+            window.location.href = domainsWithoutWWW[currentIndex];
         }, 10000);
     }
     else {
         // If not on target site, go to current index immediately
-        window.location.href = domains[currentIndex];
+        window.location.href = domainsWithoutWWW[currentIndex];
     }
 })();
