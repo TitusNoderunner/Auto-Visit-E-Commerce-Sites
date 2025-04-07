@@ -48,3 +48,5 @@ Now, the script will only attempt to click the button when you are on https://da
 
 NOTE: it can only works if you use my referral link
 https://dashboard.3dos.io/register?ref_code=62321c
+
+![image](https://github.com/user-attachments/assets/77ad437d-f1c0-4d19-bf7f-6d4c0bea4050)
